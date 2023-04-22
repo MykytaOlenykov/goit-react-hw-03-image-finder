@@ -117,7 +117,7 @@ export class App extends Component {
     return (
       <S.Container>
         <GlobalStyle />
-        <Searchbar onSubmit={this.handleSubmitForm} />
+        <Searchbar onSubmit={this.handleSubmitForm} isDisabled={isLoading} />
         <ImageGallery ref={this.galleryRef} images={images} />
         {isVisibleBtn && <Button onLoadMore={this.handleLoadMore} />}
         {isLoading && <Loader />}
