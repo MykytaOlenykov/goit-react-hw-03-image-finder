@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import * as S from './Searchbar.styled';
 import { GoSearch } from 'react-icons/go';
 
-export const Searchbar = ({ onSubmit, isDisabled }) => {
+export const Searchbar = ({ onSubmit, isDisabledBtn }) => {
   const handleSubmit = (values, { resetForm }) => {
     const searchQuery = values.searchQuery.trim().toLowerCase();
 
@@ -23,7 +23,7 @@ export const Searchbar = ({ onSubmit, isDisabled }) => {
     <S.Header>
       <Formik initialValues={{ searchQuery: '' }} onSubmit={handleSubmit}>
         <S.SearchForm>
-          <S.Button type="submit" disabled={isDisabled}>
+          <S.Button type="submit" disabled={isDisabledBtn}>
             <GoSearch />
             <S.Label>Search</S.Label>
           </S.Button>
@@ -41,5 +41,5 @@ export const Searchbar = ({ onSubmit, isDisabled }) => {
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
+  isDisabledBtn: PropTypes.bool.isRequired,
 };
