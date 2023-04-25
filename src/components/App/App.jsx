@@ -15,7 +15,6 @@ export class App extends Component {
     currentPage: 1,
     isLoading: false,
     total: 0,
-    error: null,
   };
 
   galleryRef = createRef();
@@ -54,7 +53,6 @@ export class App extends Component {
         currentPage: 1,
         images: [],
         total: 0,
-        error: null,
       });
     }
   };
@@ -90,7 +88,6 @@ export class App extends Component {
         total: totalHits,
       });
     } catch (error) {
-      this.setState({ error });
       console.log(error);
     } finally {
       this.setState({ isLoading: false });
@@ -118,7 +115,7 @@ export class App extends Component {
   }
 
   render() {
-    const { images, isLoading, total, error } = this.state;
+    const { images, isLoading, total } = this.state;
     const isVisibleBtn =
       !isLoading && images.length !== 0 && images.length < total;
 
@@ -129,7 +126,6 @@ export class App extends Component {
         <ImageGallery ref={this.galleryRef} images={images} />
         {isVisibleBtn && <Button onLoadMore={this.handleLoadMore} />}
         {isLoading && <Loader />}
-        {error && <S.ErrorMessage>{error.message}</S.ErrorMessage>}
         <ToastContainer autoClose={5000} />
       </S.Container>
     );
