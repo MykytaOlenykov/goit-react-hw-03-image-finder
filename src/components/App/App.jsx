@@ -70,21 +70,30 @@ export class App extends Component {
 
       const { hits, totalHits } = await imgsAPI.getImgs(options);
 
+      const newImages = hits.map(
+        ({ id, tags, webformatURL, largeImageURL }) => ({
+          id,
+          tags,
+          webformatURL,
+          largeImageURL,
+        })
+      );
+
       if (currentPage === 1) {
-        if (!hits.length) {
+        if (!newImages.length) {
           toast.error(`No results found for ${searchQuery}`);
           return;
         }
 
-        this.setState({ images: hits, total: totalHits });
+        this.setState({ images: newImages, total: totalHits });
       } else {
         this.setState(({ images }) => ({
-          images: [...images, ...hits],
+          images: [...images, ...newImages],
         }));
       }
 
       this.checkIsAllCollection({
-        collectionSize: hits.length,
+        collectionSize: newImages.length,
         total: totalHits,
       });
     } catch (error) {
