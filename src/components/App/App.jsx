@@ -93,7 +93,7 @@ export class App extends Component {
       }
 
       this.checkIsAllCollection({
-        collectionSize: newImages.length,
+        currentPage,
         total: totalHits,
       });
     } catch (error) {
@@ -115,8 +115,10 @@ export class App extends Component {
     return true;
   }
 
-  checkIsAllCollection({ collectionSize, total }) {
-    if (collectionSize >= total) {
+  checkIsAllCollection({ currentPage, total }) {
+    const lastPage = Math.ceil(total / 12);
+
+    if (currentPage === lastPage) {
       toast.success(
         `You have uploaded all images for request ${this.state.searchQuery}`
       );
